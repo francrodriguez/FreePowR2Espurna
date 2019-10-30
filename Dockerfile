@@ -6,5 +6,6 @@ COPY requirements.txt /tmp/
 RUN pip3 install --requirement /tmp/requirements.txt
 ADD . /resetPower
 ENV PATH $PATH:/resetPower
-CMD [ "python3", "/resetPower/resetPower.py" ]
+CMD [ "python3", "/resetPower/storedata.py" ]
+CMD [ "python3", "/resetPower/resetPowerCounter.py" ]
 
