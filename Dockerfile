@@ -1,11 +1,12 @@
-FROM ubuntu:18.04
+FROM python:3.8-slim-buster
 LABEL maintainer="Franc Rodriguez - franc@tecob.com"
-RUN apt update
-RUN apt install -qy python3 whois python3-pip firefox
+RUN apt update  && apt install -y firefox-esr \
+ && apt-get clean autoclean \
+ && apt-get autoremove --yes \
+ && rm -rf /var/lib/{apt,dpkg,cache,log}/ 
 COPY requirements.txt /tmp/
-RUN pip3 install --requirement /tmp/requirements.txt
+RUN pip install --requirement /tmp/requirements.txt
 ADD . /resetPower
 ENV PATH $PATH:/resetPower
-CMD [ "python3", "/resetPower/storedata.py" ]
-CMD [ "python3", "/resetPower/resetPowerCounter.py" ]
+CMD [ "python", "/resetPower/resetPowerCounter.py" ]
 
